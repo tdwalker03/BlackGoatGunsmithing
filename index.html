@@ -126,6 +126,31 @@
 
     </style>
   </head>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find all links with data-target
+      const links = document.querySelectorAll('a[data-target]');
+      console.log('Found links:', links.length); // Debug: Check how many links are found
+
+      links.forEach(link => {
+        link.addEventListener('click', function(event) {
+          event.preventDefault(); // Prevent default anchor behavior
+          event.stopPropagation(); // Stop Bootstrap or other scripts from interfering
+
+          const targetId = this.getAttribute('data-target');
+          console.log('Clicked link, target:', targetId); // Debug: Log the target
+
+          const targetElement = document.getElementById(targetId);
+          if (targetElement) {
+            console.log('Scrolling to:', targetId); // Debug: Confirm scrolling
+            targetElement.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            console.log('Target not found:', targetId); // Debug: If section doesn’t exist
+          }
+        });
+      });
+    });
+  </script>
   <body id="page-top">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -150,19 +175,19 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
             <li class="nav-item">
-              <a class="nav-link" href="#modifications">Modifications</a>
+              <a class="nav-link" href="#" data-target="modifications">Modifications</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#gallery">Gallery</a>
+              <a class="nav-link" href="#" data-target="gallery">Gallery</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#about">About</a>
+              <a class="nav-link" href="#" data-target="about">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#faq">FAQ</a>
+              <a class="nav-link" href="#" data-target="faq">FAQ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
+              <a class="nav-link" href="#" data-target="contact">Contact</a>
             </li>
           </ul>
         </div>
