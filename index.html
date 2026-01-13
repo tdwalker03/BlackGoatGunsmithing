@@ -28,6 +28,90 @@
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
+    <!-- Schema.org Structured Data for Local Business -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Black Goat Gunsmithing",
+      "image": "https://blackgoatgunsmithing.com/assets/img/portfolio/1.jpg",
+      "@id": "https://blackgoatgunsmithing.com",
+      "url": "https://blackgoatgunsmithing.com",
+      "telephone": "228-235-6306",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "",
+        "addressLocality": "Ocean Springs",
+        "addressRegion": "MS",
+        "postalCode": "39564",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 30.4115,
+        "longitude": -88.8283
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      },
+      "sameAs": [],
+      "description": "Black Goat Gunsmithing offers expert custom firearm modifications, Cerakote finishing, and gunsmithing services in Ocean Springs, MS. Veteran-owned with precision craftsmanship.",
+      "founder": {
+        "@type": "Person",
+        "name": "Keith Gautreaux",
+        "jobTitle": "Owner & Master Gunsmith"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "Mississippi"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Gunsmithing Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Custom Firearm Builds"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Cerakote Finishing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "General Gunsmithing"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "1911 Master Armorer Services"
+            }
+          }
+        ]
+      }
+    }
+    </script>
+
     <!-- Font Awesome icons (free version)-->
     <script
       src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"
@@ -315,6 +399,322 @@
         scroll-behavior: smooth;
       }
 
+      /* Image counter in lightbox */
+      .lightbox-counter {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+        font-size: 18px;
+        font-weight: 600;
+        background-color: rgba(52, 58, 64, 0.8);
+        padding: 8px 16px;
+        border-radius: 20px;
+        z-index: 10001;
+      }
+
+      /* Back to top button */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #343a40;
+        color: #fff;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        background-color: #2c3136;
+        transform: translateY(-3px);
+      }
+
+      @media (max-width: 767px) {
+        .back-to-top {
+          bottom: 20px;
+          right: 20px;
+          width: 45px;
+          height: 45px;
+          font-size: 18px;
+        }
+
+        .lightbox-counter {
+          font-size: 16px;
+          padding: 6px 12px;
+        }
+      }
+
+      /* Gallery filter buttons */
+      .gallery-filters {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 30px;
+      }
+
+      .filter-btn {
+        background-color: #fff;
+        border: 2px solid #343a40;
+        color: #343a40;
+        padding: 8px 20px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .filter-btn:hover {
+        background-color: #343a40;
+        color: #fff;
+      }
+
+      .filter-btn.active {
+        background-color: #343a40;
+        color: #fff;
+      }
+
+      /* Availability badge */
+      .availability-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #28a745;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+      }
+
+      .availability-badge .pulse-dot {
+        width: 10px;
+        height: 10px;
+        background-color: #fff;
+        border-radius: 50%;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.5;
+        }
+      }
+
+      /* Statistics section */
+      .stats-section {
+        background: linear-gradient(135deg, #343a40 0%, #2c3136 100%);
+        color: #fff;
+        padding: 60px 0;
+      }
+
+      .stat-item {
+        text-align: center;
+        padding: 20px;
+      }
+
+      .stat-number {
+        font-size: 48px;
+        font-weight: 700;
+        color: #ffc800;
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      .stat-label {
+        font-size: 16px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: #f0f0f0;
+      }
+
+      /* Process timeline */
+      .process-timeline {
+        position: relative;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .timeline-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+        position: relative;
+      }
+
+      .timeline-number {
+        width: 60px;
+        height: 60px;
+        background-color: #343a40;
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        font-weight: 700;
+        flex-shrink: 0;
+        z-index: 2;
+      }
+
+      .timeline-content {
+        flex: 1;
+        padding-left: 30px;
+      }
+
+      .timeline-content h4 {
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+
+      @media (max-width: 767px) {
+        .timeline-item {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .timeline-content {
+          padding-left: 0;
+          padding-top: 20px;
+        }
+      }
+
+      /* Trust badges */
+      .trust-badges {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .trust-badge {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .trust-badge:hover {
+        transform: translateY(-5px);
+      }
+
+      .trust-badge i {
+        font-size: 48px;
+        color: #343a40;
+      }
+
+      .trust-badge-text {
+        font-weight: 600;
+        color: #343a40;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      /* Testimonials section */
+      .testimonials-section {
+        background-color: #f8f9fa;
+      }
+
+      .testimonial-card {
+        background-color: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+        position: relative;
+      }
+
+      .testimonial-text {
+        font-style: italic;
+        color: #6c757d;
+        margin-bottom: 20px;
+        line-height: 1.8;
+      }
+
+      .testimonial-author {
+        font-weight: 700;
+        color: #343a40;
+      }
+
+      .testimonial-stars {
+        color: #ffc800;
+        margin-bottom: 15px;
+      }
+
+      /* Project submission section */
+      .project-submission {
+        background: linear-gradient(135deg, #343a40 0%, #2c3136 100%);
+        color: #fff;
+      }
+
+      .project-submission h2,
+      .project-submission h3 {
+        color: #fff !important;
+      }
+
+      .project-submission .form-control {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        color: #fff;
+      }
+
+      .project-submission .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .project-submission .form-control:focus {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: #ffc800;
+        color: #fff;
+      }
+
+      .custom-file-upload {
+        display: inline-block;
+        padding: 12px 30px;
+        cursor: pointer;
+        background-color: #6c757d;
+        color: #fff;
+        border-radius: 6px;
+        transition: background-color 0.3s ease;
+        font-weight: 600;
+      }
+
+      .custom-file-upload:hover {
+        background-color: #5a6268;
+      }
+
+      .custom-file-upload input[type="file"] {
+        display: none;
+      }
+
     </style>
   </head>
   <script>
@@ -496,107 +896,134 @@
         <div class="text-center mb-5">
           <h2 class="section-heading text-uppercase">Gallery</h2>
           <h3 class="section-subheading text-muted">See How We Bring Ideas to Life—One Firearm at a Time.</h3>
+
+          <!-- Availability Badge -->
+          <div class="d-flex justify-content-center">
+            <div class="availability-badge">
+              <span class="pulse-dot"></span>
+              Currently Accepting New Projects
+            </div>
+          </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">All Projects</button>
+          <button class="filter-btn" data-filter="ar">AR Builds</button>
+          <button class="filter-btn" data-filter="pistol">Pistols</button>
+          <button class="filter-btn" data-filter="rifle">Rifles</button>
+          <button class="filter-btn" data-filter="cerakote">Cerakote</button>
         </div>
 
         <!-- Gallery Grid -->
         <div class="gallery-grid">
-          <!-- Item 1 -->
-          <div class="gallery-item">
+          <!-- Item 1 - Arctic Phantom Duo -->
+          <div class="gallery-item" data-category="ar pistol cerakote">
             <img
               src="assets/img/portfolio/1.jpg"
-              alt="Custom firearm build"
+              alt="Arctic Phantom Duo - Custom AR and Glock with winter camo"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
-          <!-- Item 2 -->
-          <div class="gallery-item">
+          <!-- Item 2 - Crimson Storm -->
+          <div class="gallery-item" data-category="pistol cerakote">
             <img
               src="assets/img/portfolio/2.jpg"
-              alt="Custom firearm build"
+              alt="Crimson Storm - Glock with red urban camo"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
-          <!-- Item 3 -->
-          <div class="gallery-item">
+          <!-- Item 3 - Imperial Blaster -->
+          <div class="gallery-item" data-category="ar cerakote">
             <img
               src="assets/img/portfolio/3.jpg"
-              alt="Custom firearm build"
+              alt="Imperial Blaster - Star Wars themed AR build"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
-          <!-- Item 4 -->
-          <div class="gallery-item">
+          <!-- Item 4 - Camo Knuckles -->
+          <div class="gallery-item" data-category="ar cerakote">
             <img
               src="assets/img/portfolio/4.jpg"
-              alt="Custom firearm build"
+              alt="Camo Knuckles - Compact AR with pink camo"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
-          <!-- Item 5 -->
-          <div class="gallery-item">
+          <!-- Item 5 - Golden Marine -->
+          <div class="gallery-item" data-category="ar cerakote">
             <img
               src="assets/img/portfolio/5.jpg"
-              alt="Custom firearm build"
+              alt="Golden Marine - USMC themed AR build"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
-          <!-- Item 6 -->
-          <div class="gallery-item">
+          <!-- Item 6 - Tactical Ghost -->
+          <div class="gallery-item" data-category="ar rifle cerakote">
             <img
               src="assets/img/portfolio/6.jpg"
-              alt="Custom firearm build"
+              alt="Tactical Ghost - Precision AR-15 with gray camo"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
-          <!-- Item 7 -->
-          <div class="gallery-item">
+          <!-- Item 7 - Long-Range Reaper -->
+          <div class="gallery-item" data-category="rifle cerakote">
             <img
               src="assets/img/portfolio/7.jpg"
-              alt="Custom firearm build"
+              alt="Long-Range Reaper - Precision rifle with dark camo"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
-          <!-- Item 8 -->
-          <div class="gallery-item">
+          <!-- Item 8 - Stealth Derringer -->
+          <div class="gallery-item" data-category="pistol cerakote">
             <img
               src="assets/img/portfolio/8.JPG"
-              alt="Custom firearm build"
+              alt="Stealth Derringer - Compact pistol with gray finish"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
-          <!-- Item 9 -->
-          <div class="gallery-item">
+          <!-- Item 9 - Blue Shadow -->
+          <div class="gallery-item" data-category="pistol cerakote">
             <img
               src="assets/img/portfolio/9.JPG"
-              alt="Custom firearm build"
+              alt="Blue Shadow - Sig P365 with blue digital camo"
               loading="lazy"
               onclick="openLightbox(this.src)"
             />
           </div>
 
           <!-- Add more images here - just copy the gallery-item div structure -->
-          <!-- The grid will automatically adjust to accommodate 100+ images -->
+          <!-- Example:
+          <div class="gallery-item" data-category="ar pistol cerakote">
+            <img src="assets/img/portfolio/10.jpg" alt="Description" loading="lazy" onclick="openLightbox(this.src)" />
+          </div>
+          -->
         </div>
       </div>
     </section>
 
     <!-- Lightbox Modal -->
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-      <span class="lightbox-close">&times;</span>
-      <img id="lightbox-img" src="" alt="Full size image">
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Image viewer">
+      <span class="lightbox-close" onclick="closeLightbox(); event.stopPropagation();" aria-label="Close lightbox">&times;</span>
+      <div class="lightbox-counter" id="lightbox-counter" aria-live="polite"></div>
+      <img id="lightbox-img" src="" alt="Full size firearm image">
       <div class="lightbox-nav">
-        <button class="lightbox-prev" onclick="navigateLightbox(-1); event.stopPropagation();">&lsaquo;</button>
-        <button class="lightbox-next" onclick="navigateLightbox(1); event.stopPropagation();">&rsaquo;</button>
+        <button class="lightbox-prev" onclick="navigateLightbox(-1); event.stopPropagation();" aria-label="Previous image">&lsaquo;</button>
+        <button class="lightbox-next" onclick="navigateLightbox(1); event.stopPropagation();" aria-label="Next image">&rsaquo;</button>
       </div>
     </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
 
   <!-- About Section -->
   <section class="page-section" id="about">
@@ -630,6 +1057,204 @@
             and a truly collaborative design process—ensuring every modification
             reflects your preferences and needs.
           </p>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <i class="fas fa-medal"></i>
+            <div class="trust-badge-text">U.S. Army<br>Veteran</div>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-tools"></i>
+            <div class="trust-badge-text">Master Armorer<br>Certified</div>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-certificate"></i>
+            <div class="trust-badge-text">FFL Licensed<br>Gunsmith</div>
+          </div>
+          <div class="trust-badge">
+            <i class="fas fa-paint-brush"></i>
+            <div class="trust-badge-text">Cerakote<br>Specialist</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statistics Section -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number" data-target="500">0</span>
+            <span class="stat-label">Projects Completed</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number" data-target="15">0</span>
+            <span class="stat-label">Years Experience</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number" data-target="100">0</span>
+            <span class="stat-label">5-Star Reviews</span>
+          </div>
+        </div>
+        <div class="col-md-3 col-6">
+          <div class="stat-item">
+            <span class="stat-number" data-target="48">0</span>
+            <span class="stat-label">Hour Turnaround</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Timeline Section -->
+  <section class="page-section" id="process">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-heading text-uppercase">How It Works</h2>
+        <h3 class="section-subheading text-muted">Your Journey from Vision to Reality</h3>
+      </div>
+      <div class="process-timeline">
+        <div class="timeline-item">
+          <div class="timeline-number">1</div>
+          <div class="timeline-content">
+            <h4>Initial Consultation</h4>
+            <p class="text-muted">Contact us to discuss your project vision. We'll talk through your goals, preferences, and budget to ensure we're aligned on the details.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-number">2</div>
+          <div class="timeline-content">
+            <h4>Design & Quote</h4>
+            <p class="text-muted">We'll provide a detailed estimate covering all parts, labor, and Cerakote options. You'll know exactly what to expect before we begin.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-number">3</div>
+          <div class="timeline-content">
+            <h4>Custom Build</h4>
+            <p class="text-muted">Your firearm enters our shop where we apply precision gunsmithing and custom Cerakote finishing with meticulous attention to detail.</p>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-number">4</div>
+          <div class="timeline-content">
+            <h4>Quality Check & Delivery</h4>
+            <p class="text-muted">Every build undergoes rigorous testing and inspection. Once approved, we'll coordinate pickup or shipping to get your custom firearm in your hands.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="page-section testimonials-section" id="testimonials">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-heading text-uppercase">What Our Customers Say</h2>
+        <h3 class="section-subheading text-muted">Real Reviews from Real Customers</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Keith did an outstanding job on my custom AR build. The Cerakote finish is flawless and the attention to detail is incredible. Highly recommend!"</p>
+            <div class="testimonial-author">- Mike R.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Fast turnaround, fair pricing, and exceptional work. Keith's military precision shows in every project. My Glock has never looked better!"</p>
+            <div class="testimonial-author">- Sarah T.</div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+              <i class="fas fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Professional, knowledgeable, and passionate about his craft. Black Goat Gunsmithing is my go-to for all my firearm needs."</p>
+            <div class="testimonial-author">- James D.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project Submission Form Section -->
+  <section class="page-section project-submission" id="project-form">
+    <div class="container">
+      <div class="text-center mb-5">
+        <h2 class="section-heading text-uppercase">Start Your Project</h2>
+        <h3 class="section-subheading">Tell Us About Your Dream Build</h3>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <form id="projectForm">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="text" id="project-name" class="form-control" placeholder="Your Name *" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <input type="email" id="project-email" class="form-control" placeholder="Email *" required />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <input type="tel" id="project-phone" class="form-control" placeholder="Phone Number *" required />
+              </div>
+              <div class="col-md-6 mb-3">
+                <select id="project-type" class="form-control" required>
+                  <option value="">Project Type *</option>
+                  <option value="custom-build">Custom Build</option>
+                  <option value="cerakote">Cerakote Only</option>
+                  <option value="modification">Modification</option>
+                  <option value="repair">Repair</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group mb-3">
+              <textarea id="project-description" class="form-control" rows="5" placeholder="Describe your project vision, including firearm type, desired modifications, color preferences, etc. *" required></textarea>
+            </div>
+            <div class="form-group mb-4">
+              <label class="custom-file-upload">
+                <input type="file" id="project-files" accept="image/*" multiple />
+                <i class="fas fa-cloud-upload-alt"></i> Upload Reference Images (Optional)
+              </label>
+              <div id="file-names" style="color: #fff; margin-top: 10px; font-size: 14px;"></div>
+            </div>
+            <div id="project-success"></div>
+            <div class="text-center">
+              <button type="submit" id="project-submit-btn" class="btn btn-primary btn-lg text-uppercase">
+                Submit Project Request
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -860,16 +1485,17 @@
     <!-- Core theme JS -->
     <script src="js/scripts.js"></script>
 
-    <!-- Gallery Lightbox JavaScript -->
+    <!-- Gallery Lightbox & Enhanced Features JavaScript -->
     <script>
       // Get all gallery images
       let galleryImages = [];
       let currentImageIndex = 0;
+      let touchStartX = 0;
+      let touchEndX = 0;
 
       document.addEventListener('DOMContentLoaded', function() {
-        // Collect all gallery images
-        const images = document.querySelectorAll('.gallery-item img');
-        galleryImages = Array.from(images).map(img => img.src);
+        // Collect all gallery images (initially visible)
+        updateGalleryImages();
 
         // Add keyboard navigation
         document.addEventListener('keydown', function(e) {
@@ -884,24 +1510,175 @@
             }
           }
         });
+
+        // Add touch gesture support for lightbox
+        const lightbox = document.getElementById('lightbox');
+        lightbox.addEventListener('touchstart', function(e) {
+          touchStartX = e.changedTouches[0].screenX;
+        }, false);
+
+        lightbox.addEventListener('touchend', function(e) {
+          touchEndX = e.changedTouches[0].screenX;
+          handleSwipe();
+        }, false);
+
+        // Gallery filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        filterButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            const filter = this.getAttribute('data-filter');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            galleryItems.forEach(item => {
+              if (filter === 'all') {
+                item.style.display = 'block';
+              } else {
+                const categories = item.getAttribute('data-category');
+                if (categories && categories.includes(filter)) {
+                  item.style.display = 'block';
+                } else {
+                  item.style.display = 'none';
+                }
+              }
+            });
+
+            // Update gallery images array after filtering
+            updateGalleryImages();
+          });
+        });
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+          if (window.pageYOffset > 300) {
+            backToTopButton.classList.add('visible');
+          } else {
+            backToTopButton.classList.remove('visible');
+          }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Animated statistics counter
+        let statsAnimated = false;
+        const statsSection = document.querySelector('.stats-section');
+
+        if (statsSection) {
+          const observerOptions = {
+            threshold: 0.5
+          };
+
+          const statsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+              if (entry.isIntersecting && !statsAnimated) {
+                statsAnimated = true;
+                animateStats();
+              }
+            });
+          }, observerOptions);
+
+          statsObserver.observe(statsSection);
+        }
+
+        // Project form file upload display
+        const projectFiles = document.getElementById('project-files');
+        if (projectFiles) {
+          projectFiles.addEventListener('change', function() {
+            const fileNames = Array.from(this.files).map(file => file.name).join(', ');
+            document.getElementById('file-names').textContent = fileNames ? `Selected: ${fileNames}` : '';
+          });
+        }
+
+        // Project form submission
+        const projectForm = document.getElementById('projectForm');
+        if (projectForm) {
+          projectForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('project-submit-btn');
+            const successDiv = document.getElementById('project-success');
+
+            // Basic validation
+            const name = document.getElementById('project-name').value.trim();
+            const email = document.getElementById('project-email').value.trim();
+            const phone = document.getElementById('project-phone').value.trim();
+            const projectType = document.getElementById('project-type').value;
+            const description = document.getElementById('project-description').value.trim();
+
+            if (!name || !email || !phone || !projectType || !description) {
+              successDiv.innerHTML = '<div class="alert alert-danger mt-3">Please fill in all required fields.</div>';
+              return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+            // Prepare data for EmailJS
+            const templateParams = {
+              from_name: name,
+              from_email: email,
+              phone: phone,
+              project_type: projectType,
+              message: description
+            };
+
+            // Send via EmailJS (using same service)
+            emailjs.send("service_1ihscpf", "template_vcw721k", templateParams)
+              .then(function(response) {
+                console.log('SUCCESS!', response.status, response.text);
+                successDiv.innerHTML = '<div class="alert alert-success mt-3"><strong>Success!</strong> Your project request has been submitted. We\'ll contact you soon!</div>';
+                projectForm.reset();
+                document.getElementById('file-names').textContent = '';
+
+                setTimeout(function() {
+                  submitBtn.disabled = false;
+                  submitBtn.innerHTML = 'Submit Project Request';
+                  successDiv.innerHTML = '';
+                }, 5000);
+              }, function(error) {
+                console.log('FAILED...', error);
+                successDiv.innerHTML = '<div class="alert alert-danger mt-3"><strong>Error!</strong> Something went wrong. Please call us directly at 228-235-6306.</div>';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Submit Project Request';
+              });
+          });
+        }
       });
+
+      function updateGalleryImages() {
+        const visibleImages = document.querySelectorAll('.gallery-item:not([style*="display: none"]) img');
+        galleryImages = Array.from(visibleImages).map(img => img.src);
+      }
 
       function openLightbox(imageSrc) {
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxCounter = document.getElementById('lightbox-counter');
 
         // Find the current image index
         currentImageIndex = galleryImages.indexOf(imageSrc);
 
         lightboxImg.src = imageSrc;
+        updateLightboxCounter();
         lightbox.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        document.body.style.overflow = 'hidden';
+
+        // Preload next and previous images
+        preloadAdjacentImages();
       }
 
       function closeLightbox() {
         const lightbox = document.getElementById('lightbox');
         lightbox.classList.remove('active');
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = '';
       }
 
       function navigateLightbox(direction) {
@@ -916,6 +1693,63 @@
 
         const lightboxImg = document.getElementById('lightbox-img');
         lightboxImg.src = galleryImages[currentImageIndex];
+        updateLightboxCounter();
+        preloadAdjacentImages();
+      }
+
+      function updateLightboxCounter() {
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        lightboxCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+      }
+
+      function preloadAdjacentImages() {
+        // Preload next image
+        const nextIndex = (currentImageIndex + 1) % galleryImages.length;
+        const nextImg = new Image();
+        nextImg.src = galleryImages[nextIndex];
+
+        // Preload previous image
+        const prevIndex = (currentImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        const prevImg = new Image();
+        prevImg.src = galleryImages[prevIndex];
+      }
+
+      function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchEndX - touchStartX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+          if (diff > 0) {
+            // Swipe right - go to previous
+            navigateLightbox(-1);
+          } else {
+            // Swipe left - go to next
+            navigateLightbox(1);
+          }
+        }
+      }
+
+      function animateStats() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+
+        statNumbers.forEach(stat => {
+          const target = parseInt(stat.getAttribute('data-target'));
+          const duration = 2000; // 2 seconds
+          const increment = target / (duration / 16); // 60fps
+          let current = 0;
+
+          const updateCounter = () => {
+            current += increment;
+            if (current < target) {
+              stat.textContent = Math.floor(current);
+              requestAnimationFrame(updateCounter);
+            } else {
+              stat.textContent = target + (target === 48 ? '' : '+');
+            }
+          };
+
+          updateCounter();
+        });
       }
     </script>
   </body>
