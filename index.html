@@ -399,6 +399,139 @@
         scroll-behavior: smooth;
       }
 
+      /* Scroll to Top Button */
+      #scrollToTopBtn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #343a40;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      #scrollToTopBtn.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #scrollToTopBtn:hover {
+        background-color: #495057;
+        transform: translateY(-3px);
+      }
+
+      /* Enhanced button styles */
+      .btn-primary {
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Gallery loading skeleton */
+      .gallery-item.loading {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* Improved filter button animations */
+      .filter-btn {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .filter-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background-color: rgba(52, 58, 64, 0.1);
+        transform: translate(-50%, -50%);
+        transition: width 0.5s ease, height 0.5s ease;
+      }
+
+      .filter-btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      /* Enhanced stat animations */
+      .stat-item {
+        transition: transform 0.3s ease;
+      }
+
+      .stat-item:hover {
+        transform: scale(1.05);
+      }
+
+      /* Smooth transitions for all elements */
+      * {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Active navigation link styling */
+      .navbar-nav a.active {
+        color: #ffc107 !important;
+        font-weight: 600;
+      }
+
+      /* Form validation styles */
+      .form-control.is-valid {
+        border-color: #28a745;
+        padding-right: calc(1.5em + 0.75rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+      }
+
+      .form-control.is-invalid {
+        border-color: #dc3545;
+        padding-right: calc(1.5em + 0.75rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+      }
+
+      .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.25);
+      }
+
+      /* Improved testimonial card hover effect */
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      /* Enhanced service card animations */
+      .col-md-4:hover .fa-stack {
+        transform: scale(1.1) rotate(5deg);
+        transition: transform 0.3s ease;
+      }
+
       /* Image counter in lightbox */
       .lightbox-counter {
         position: absolute;
@@ -1018,14 +1151,6 @@
               <img src="assets/img/portfolio/8.JPG" alt="Stealth Derringer - Compact pistol with gray finish" loading="lazy" onclick="openLightbox('assets/img/portfolio/8.JPG')" />
             </picture>
           </div>
-          <!-- Item 9 - Blue Shadow -->
-          <div class="gallery-item" data-category="pistol cerakote">
-            <picture>
-              <source srcset="assets/img/portfolio/9.webp" type="image/webp">
-              <img src="assets/img/portfolio/9.JPG" alt="Blue Shadow - Sig P365 with blue digital camo" loading="lazy" onclick="openLightbox('assets/img/portfolio/9.JPG')" />
-            </picture>
-          </div>
-
           <!-- Item 10 -->
           <div class="gallery-item" data-category="ar cerakote">
             <picture>
@@ -1068,13 +1193,6 @@
               <img src="assets/img/portfolio/15.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/15.jpg')" />
             </picture>
           </div>
-          <!-- Item 16 -->
-          <div class="gallery-item" data-category="pistol cerakote">
-            <picture>
-              <source srcset="assets/img/portfolio/16.webp" type="image/webp">
-              <img src="assets/img/portfolio/16.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/16.jpg')" />
-            </picture>
-          </div>
           <!-- Item 17 -->
           <div class="gallery-item" data-category="ar rifle cerakote">
             <picture>
@@ -1094,13 +1212,6 @@
             <picture>
               <source srcset="assets/img/portfolio/19.webp" type="image/webp">
               <img src="assets/img/portfolio/19.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/19.jpg')" />
-            </picture>
-          </div>
-          <!-- Item 20 -->
-          <div class="gallery-item" data-category="pistol cerakote">
-            <picture>
-              <source srcset="assets/img/portfolio/20.webp" type="image/webp">
-              <img src="assets/img/portfolio/20.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/20.jpg')" />
             </picture>
           </div>
           <!-- Item 21 -->
@@ -1206,13 +1317,6 @@
             <picture>
               <source srcset="assets/img/portfolio/35.webp" type="image/webp">
               <img src="assets/img/portfolio/35.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/35.jpg')" />
-            </picture>
-          </div>
-          <!-- Item 36 -->
-          <div class="gallery-item" data-category="ar cerakote">
-            <picture>
-              <source srcset="assets/img/portfolio/36.webp" type="image/webp">
-              <img src="assets/img/portfolio/36.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/36.jpg')" />
             </picture>
           </div>
           <!-- Item 37 -->
@@ -1364,6 +1468,10 @@
             <div class="trust-badge-text">Master Armorer<br>Certified</div>
           </div>
           <div class="trust-badge">
+            <i class="fas fa-certificate"></i>
+            <div class="trust-badge-text">FFL Licensed<br>Gunsmith</div>
+          </div>
+          <div class="trust-badge">
             <i class="fas fa-paint-brush"></i>
             <div class="trust-badge-text">Cerakote<br>Specialist</div>
           </div>
@@ -1384,7 +1492,7 @@
         </div>
         <div class="col-md-3 col-6">
           <div class="stat-item">
-            <span class="stat-number" data-target="15">0</span>
+            <span class="stat-number" data-target="20">0</span>+
             <span class="stat-label">Years Experience</span>
           </div>
         </div>
@@ -2063,6 +2171,107 @@
           updateCounter();
         });
       }
+    </script>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Back to top" aria-label="Scroll to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+      // Scroll to top button functionality
+      const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.add('show');
+        } else {
+          scrollToTopBtn.classList.remove('show');
+        }
+      });
+
+      scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Active navigation highlighting
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.navbar-nav a[href^="#"]');
+
+      function highlightNavigation() {
+        let scrollPosition = window.pageYOffset + 100;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + sectionId) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', highlightNavigation);
+      highlightNavigation(); // Run on page load
+
+      // Enhanced form validation feedback
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        const inputs = contactForm.querySelectorAll('input, textarea, select');
+
+        inputs.forEach(input => {
+          input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+              this.classList.add('is-invalid');
+              this.classList.remove('is-valid');
+            } else if (this.type === 'email' && this.value) {
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if (emailRegex.test(this.value)) {
+                this.classList.add('is-valid');
+                this.classList.remove('is-invalid');
+              } else {
+                this.classList.add('is-invalid');
+                this.classList.remove('is-valid');
+              }
+            } else if (this.value.trim()) {
+              this.classList.add('is-valid');
+              this.classList.remove('is-invalid');
+            }
+          });
+        });
+      }
+
+      // Add smooth animations for gallery items on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observe all gallery items for fade-in animation
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(item);
+      });
     </script>
   </body>
 </html>
