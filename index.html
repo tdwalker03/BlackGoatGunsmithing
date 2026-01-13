@@ -459,6 +459,40 @@
         }
       }
 
+      /* Gallery container with collapse functionality */
+      .gallery-grid-container {
+        position: relative;
+      }
+
+      .gallery-grid.collapsed {
+        max-height: 600px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .gallery-grid.collapsed::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 150px;
+        background: linear-gradient(to bottom, transparent, #f8f9fa);
+        pointer-events: none;
+      }
+
+      @media (min-width: 768px) {
+        .gallery-grid.collapsed {
+          max-height: 700px;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .gallery-grid.collapsed {
+          max-height: 800px;
+        }
+      }
+
       /* Gallery filter buttons */
       .gallery-filters {
         display: flex;
@@ -643,6 +677,15 @@
         background-color: #f8f9fa;
       }
 
+      .testimonials-section .row {
+        display: flex;
+        align-items: stretch;
+      }
+
+      .testimonials-section .col-md-4 {
+        display: flex;
+      }
+
       .testimonial-card {
         background-color: #fff;
         padding: 30px;
@@ -650,6 +693,10 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         margin-bottom: 30px;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 250px;
       }
 
       .testimonial-text {
@@ -897,13 +944,11 @@
           <h2 class="section-heading text-uppercase">Gallery</h2>
           <h3 class="section-subheading text-muted">See How We Bring Ideas to Life—One Firearm at a Time.</h3>
 
-          <!-- Availability Badge -->
-          <div class="d-flex justify-content-center">
-            <div class="availability-badge">
-              <span class="pulse-dot"></span>
-              Currently Accepting New Projects
-            </div>
-          </div>
+          <!-- Availability Status -->
+          <p class="text-muted" style="font-size: 16px; margin-bottom: 25px;">
+            <i class="fas fa-check-circle" style="color: #28a745; margin-right: 8px;"></i>
+            Currently Accepting New Projects
+          </p>
         </div>
 
         <!-- Category Filters -->
@@ -916,7 +961,7 @@
         </div>
 
         <!-- Gallery Grid -->
-        <div class="gallery-grid">
+        <div class="gallery-grid" id="galleryGrid">
           <!-- Item 1 - Arctic Phantom Duo -->
           <div class="gallery-item" data-category="ar pistol cerakote">
             <picture>
@@ -1248,6 +1293,13 @@
             </picture>
           </div>
         </div>
+
+        <!-- Show More Button -->
+        <div class="text-center mt-4" id="showMoreContainer">
+          <button class="btn btn-primary btn-lg" id="showMoreBtn">
+            Show More <i class="fas fa-chevron-down ms-2"></i>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -1302,7 +1354,7 @@
         </div>
 
         <!-- Trust Badges -->
-        <div class="trust-badges">
+        <div class="trust-badges" style="justify-content: flex-end; padding-right: 60px;">
           <div class="trust-badge">
             <i class="fas fa-medal"></i>
             <div class="trust-badge-text">U.S. Army<br>Veteran</div>
@@ -1310,10 +1362,6 @@
           <div class="trust-badge">
             <i class="fas fa-tools"></i>
             <div class="trust-badge-text">Master Armorer<br>Certified</div>
-          </div>
-          <div class="trust-badge">
-            <i class="fas fa-certificate"></i>
-            <div class="trust-badge-text">FFL Licensed<br>Gunsmith</div>
           </div>
           <div class="trust-badge">
             <i class="fas fa-paint-brush"></i>
@@ -1738,6 +1786,28 @@
       document.addEventListener('DOMContentLoaded', function() {
         // Collect all gallery images (initially visible)
         updateGalleryImages();
+
+        // Gallery expand/collapse functionality
+        const galleryGrid = document.getElementById('galleryGrid');
+        const showMoreBtn = document.getElementById('showMoreBtn');
+        const showMoreContainer = document.getElementById('showMoreContainer');
+
+        // Start with gallery collapsed
+        galleryGrid.classList.add('collapsed');
+
+        showMoreBtn.addEventListener('click', function() {
+          if (galleryGrid.classList.contains('collapsed')) {
+            // Expand gallery
+            galleryGrid.classList.remove('collapsed');
+            showMoreBtn.innerHTML = 'Show Less <i class="fas fa-chevron-up ms-2"></i>';
+          } else {
+            // Collapse gallery
+            galleryGrid.classList.add('collapsed');
+            showMoreBtn.innerHTML = 'Show More <i class="fas fa-chevron-down ms-2"></i>';
+            // Scroll back to gallery top
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
 
         // Add keyboard navigation
         document.addEventListener('keydown', function(e) {
