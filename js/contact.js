@@ -1,6 +1,6 @@
 $(document).ready(function () {
-  // Initialize EmailJS (only if you're using EmailJS)
-  emailjs.init("hEubSTaTwdmPBBdTW"); // e.g. "hEubSTaTwdmPBBdTW"
+  // Initialize EmailJS
+  emailjs.init("hEubSTaTwdmPBBdTW");
 
   $("#contactForm").on("submit", function (event) {
     event.preventDefault();
@@ -11,13 +11,34 @@ $(document).ready(function () {
     const phone = $("#phone").val().trim();
     const contactMethod = $("#contactMethod").val();
     const message = $("#message").val().trim();
+    const submitBtn = $("#submit-btn");
+    const successDiv = $("#success");
 
+    // Clear previous messages
+    successDiv.html("");
+
+    // Validation
     if (!name || !email || !message) {
-      alert("Please fill in required fields: Name, Email, and Message.");
+      successDiv.html(
+        '<div class="alert alert-danger mt-3">Please fill in required fields: Name, Email, and Message.</div>'
+      );
       return;
     }
 
-    // If using EmailJS, prepare the data to match your EmailJS template
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      successDiv.html(
+        '<div class="alert alert-danger mt-3">Please enter a valid email address.</div>'
+      );
+      return;
+    }
+
+    // Show loading state
+    submitBtn.prop("disabled", true);
+    submitBtn.html('<i class="fas fa-spinner fa-spin"></i> Sending...');
+
+    // Prepare EmailJS template parameters
     const templateParams = {
       from_name: name,
       from_email: email,
@@ -26,18 +47,33 @@ $(document).ready(function () {
       message: message,
     };
 
-    // Send via EmailJS (replace with your actual IDs)
+    // Send via EmailJS
     emailjs
       .send("service_1ihscpf", "template_vcw721k", templateParams)
       .then(
         function (response) {
           console.log("SUCCESS!", response.status, response.text);
-          alert("Your message has been sent!");
+          successDiv.html(
+            '<div class="alert alert-success mt-3"><strong>Success!</strong> Your message has been sent. We\'ll get back to you soon!</div>'
+          );
           $("#contactForm")[0].reset();
+
+          // Reset button after 2 seconds
+          setTimeout(function() {
+            submitBtn.prop("disabled", false);
+            submitBtn.html("Send Message");
+            successDiv.html("");
+          }, 5000);
         },
         function (error) {
           console.log("FAILED...", error);
-          alert("Oops! Something went wrong. Please try again later.");
+          successDiv.html(
+            '<div class="alert alert-danger mt-3"><strong>Error!</strong> Something went wrong. Please try again or call us directly.</div>'
+          );
+
+          // Reset button
+          submitBtn.prop("disabled", false);
+          submitBtn.html("Send Message");
         }
       );
   });
