@@ -399,6 +399,139 @@
         scroll-behavior: smooth;
       }
 
+      /* Scroll to Top Button */
+      #scrollToTopBtn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background-color: #343a40;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      #scrollToTopBtn.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      #scrollToTopBtn:hover {
+        background-color: #495057;
+        transform: translateY(-3px);
+      }
+
+      /* Enhanced button styles */
+      .btn-primary {
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      /* Gallery loading skeleton */
+      .gallery-item.loading {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+      }
+
+      @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* Improved filter button animations */
+      .filter-btn {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .filter-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background-color: rgba(52, 58, 64, 0.1);
+        transform: translate(-50%, -50%);
+        transition: width 0.5s ease, height 0.5s ease;
+      }
+
+      .filter-btn:hover::before {
+        width: 300px;
+        height: 300px;
+      }
+
+      /* Enhanced stat animations */
+      .stat-item {
+        transition: transform 0.3s ease;
+      }
+
+      .stat-item:hover {
+        transform: scale(1.05);
+      }
+
+      /* Smooth transitions for all elements */
+      * {
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      /* Active navigation link styling */
+      .navbar-nav a.active {
+        color: #ffc107 !important;
+        font-weight: 600;
+      }
+
+      /* Form validation styles */
+      .form-control.is-valid {
+        border-color: #28a745;
+        padding-right: calc(1.5em + 0.75rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+      }
+
+      .form-control.is-invalid {
+        border-color: #dc3545;
+        padding-right: calc(1.5em + 0.75rem);
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right calc(0.375em + 0.1875rem) center;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+      }
+
+      .form-control:focus {
+        box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.25);
+      }
+
+      /* Improved testimonial card hover effect */
+      .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      /* Enhanced service card animations */
+      .col-md-4:hover .fa-stack {
+        transform: scale(1.1) rotate(5deg);
+        transition: transform 0.3s ease;
+      }
+
       /* Image counter in lightbox */
       .lightbox-counter {
         position: absolute;
@@ -456,6 +589,40 @@
         .lightbox-counter {
           font-size: 16px;
           padding: 6px 12px;
+        }
+      }
+
+      /* Gallery container with collapse functionality */
+      .gallery-grid-container {
+        position: relative;
+      }
+
+      .gallery-grid.collapsed {
+        max-height: 600px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .gallery-grid.collapsed::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 150px;
+        background: linear-gradient(to bottom, transparent, #f8f9fa);
+        pointer-events: none;
+      }
+
+      @media (min-width: 768px) {
+        .gallery-grid.collapsed {
+          max-height: 700px;
+        }
+      }
+
+      @media (min-width: 1200px) {
+        .gallery-grid.collapsed {
+          max-height: 800px;
         }
       }
 
@@ -643,6 +810,15 @@
         background-color: #f8f9fa;
       }
 
+      .testimonials-section .row {
+        display: flex;
+        align-items: stretch;
+      }
+
+      .testimonials-section .col-md-4 {
+        display: flex;
+      }
+
       .testimonial-card {
         background-color: #fff;
         padding: 30px;
@@ -650,6 +826,10 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         margin-bottom: 30px;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        min-height: 250px;
       }
 
       .testimonial-text {
@@ -693,6 +873,17 @@
       .project-submission .form-control:focus {
         background-color: rgba(255, 255, 255, 0.15);
         border-color: #ffc800;
+        color: #fff;
+      }
+
+      /* Dropdown select options styling */
+      .project-submission select.form-control option {
+        background-color: #343a40;
+        color: #fff;
+      }
+
+      .project-submission select.form-control {
+        background-color: rgba(255, 255, 255, 0.1);
         color: #fff;
       }
 
@@ -778,6 +969,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" data-target="contact">Contact</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn btn-primary text-white" href="#" data-target="project-form" style="padding: 8px 20px; border-radius: 25px;">Start Your Project</a>
             </li>
           </ul>
         </div>
@@ -897,356 +1091,352 @@
           <h2 class="section-heading text-uppercase">Gallery</h2>
           <h3 class="section-subheading text-muted">See How We Bring Ideas to Life—One Firearm at a Time.</h3>
 
-          <!-- Availability Badge -->
-          <div class="d-flex justify-content-center">
-            <div class="availability-badge">
-              <span class="pulse-dot"></span>
-              Currently Accepting New Projects
-            </div>
-          </div>
+          <!-- Availability Status -->
+          <p class="text-muted" style="font-size: 16px; margin-bottom: 25px;">
+            <i class="fas fa-check-circle" style="color: #28a745; margin-right: 8px;"></i>
+            Currently Accepting New Projects
+          </p>
         </div>
 
         <!-- Category Filters -->
         <div class="gallery-filters">
           <button class="filter-btn active" data-filter="all">All Projects</button>
-          <button class="filter-btn" data-filter="ar">AR Builds</button>
           <button class="filter-btn" data-filter="pistol">Pistols</button>
           <button class="filter-btn" data-filter="rifle">Rifles</button>
-          <button class="filter-btn" data-filter="cerakote">Cerakote</button>
         </div>
 
         <!-- Gallery Grid -->
-        <div class="gallery-grid">
+        <div class="gallery-grid" id="galleryGrid">
           <!-- Item 1 - Arctic Phantom Duo -->
-          <div class="gallery-item" data-category="ar pistol cerakote">
+          <div class="gallery-item" data-category="pistol rifle">
             <picture>
               <source srcset="assets/img/portfolio/1.webp" type="image/webp">
               <img src="assets/img/portfolio/1.jpg" alt="Arctic Phantom Duo - Custom AR and Glock with winter camo" loading="lazy" onclick="openLightbox('assets/img/portfolio/1.jpg')" />
             </picture>
           </div>
           <!-- Item 2 - Crimson Storm -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/2.webp" type="image/webp">
               <img src="assets/img/portfolio/2.jpg" alt="Crimson Storm - Glock with red urban camo" loading="lazy" onclick="openLightbox('assets/img/portfolio/2.jpg')" />
             </picture>
           </div>
           <!-- Item 3 - Imperial Blaster -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/3.webp" type="image/webp">
               <img src="assets/img/portfolio/3.jpg" alt="Imperial Blaster - Star Wars themed AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/3.jpg')" />
             </picture>
           </div>
           <!-- Item 4 - Camo Knuckles -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/4.webp" type="image/webp">
               <img src="assets/img/portfolio/4.jpg" alt="Camo Knuckles - Compact AR with pink camo" loading="lazy" onclick="openLightbox('assets/img/portfolio/4.jpg')" />
             </picture>
           </div>
           <!-- Item 5 - Golden Marine -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/5.webp" type="image/webp">
               <img src="assets/img/portfolio/5.jpg" alt="Golden Marine - USMC themed AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/5.jpg')" />
             </picture>
           </div>
           <!-- Item 6 - Tactical Ghost -->
-          <div class="gallery-item" data-category="ar rifle cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/6.webp" type="image/webp">
               <img src="assets/img/portfolio/6.jpg" alt="Tactical Ghost - Precision AR-15 with gray camo" loading="lazy" onclick="openLightbox('assets/img/portfolio/6.jpg')" />
             </picture>
           </div>
           <!-- Item 7 - Long-Range Reaper -->
-          <div class="gallery-item" data-category="rifle cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/7.webp" type="image/webp">
               <img src="assets/img/portfolio/7.jpg" alt="Long-Range Reaper - Precision rifle with dark camo" loading="lazy" onclick="openLightbox('assets/img/portfolio/7.jpg')" />
             </picture>
           </div>
           <!-- Item 8 - Stealth Derringer -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/8.webp" type="image/webp">
               <img src="assets/img/portfolio/8.JPG" alt="Stealth Derringer - Compact pistol with gray finish" loading="lazy" onclick="openLightbox('assets/img/portfolio/8.JPG')" />
             </picture>
           </div>
           <!-- Item 9 - Blue Shadow -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/9.webp" type="image/webp">
               <img src="assets/img/portfolio/9.JPG" alt="Blue Shadow - Sig P365 with blue digital camo" loading="lazy" onclick="openLightbox('assets/img/portfolio/9.JPG')" />
             </picture>
           </div>
-
           <!-- Item 10 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/10.webp" type="image/webp">
               <img src="assets/img/portfolio/10.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/10.jpg')" />
             </picture>
           </div>
           <!-- Item 11 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/11.webp" type="image/webp">
               <img src="assets/img/portfolio/11.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/11.jpg')" />
             </picture>
           </div>
           <!-- Item 12 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/12.webp" type="image/webp">
               <img src="assets/img/portfolio/12.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/12.jpg')" />
             </picture>
           </div>
           <!-- Item 13 -->
-          <div class="gallery-item" data-category="rifle cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/13.webp" type="image/webp">
               <img src="assets/img/portfolio/13.jpg" alt="Custom rifle build" loading="lazy" onclick="openLightbox('assets/img/portfolio/13.jpg')" />
             </picture>
           </div>
           <!-- Item 14 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/14.webp" type="image/webp">
               <img src="assets/img/portfolio/14.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/14.jpg')" />
             </picture>
           </div>
           <!-- Item 15 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/15.webp" type="image/webp">
               <img src="assets/img/portfolio/15.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/15.jpg')" />
             </picture>
           </div>
           <!-- Item 16 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/16.webp" type="image/webp">
               <img src="assets/img/portfolio/16.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/16.jpg')" />
             </picture>
           </div>
           <!-- Item 17 -->
-          <div class="gallery-item" data-category="ar rifle cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/17.webp" type="image/webp">
               <img src="assets/img/portfolio/17.jpg" alt="Custom AR rifle build" loading="lazy" onclick="openLightbox('assets/img/portfolio/17.jpg')" />
             </picture>
           </div>
           <!-- Item 18 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/18.webp" type="image/webp">
               <img src="assets/img/portfolio/18.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/18.jpg')" />
             </picture>
           </div>
           <!-- Item 19 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/19.webp" type="image/webp">
               <img src="assets/img/portfolio/19.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/19.jpg')" />
             </picture>
           </div>
-          <!-- Item 20 -->
-          <div class="gallery-item" data-category="pistol cerakote">
-            <picture>
-              <source srcset="assets/img/portfolio/20.webp" type="image/webp">
-              <img src="assets/img/portfolio/20.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/20.jpg')" />
-            </picture>
-          </div>
+          <!-- Item 20 is duplicate of 19, removed -->
           <!-- Item 21 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/21.webp" type="image/webp">
               <img src="assets/img/portfolio/21.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/21.jpg')" />
             </picture>
           </div>
           <!-- Item 22 -->
-          <div class="gallery-item" data-category="rifle cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/22.webp" type="image/webp">
               <img src="assets/img/portfolio/22.jpg" alt="Custom rifle build" loading="lazy" onclick="openLightbox('assets/img/portfolio/22.jpg')" />
             </picture>
           </div>
           <!-- Item 23 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/23.webp" type="image/webp">
               <img src="assets/img/portfolio/23.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/23.jpg')" />
             </picture>
           </div>
           <!-- Item 24 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/24.webp" type="image/webp">
               <img src="assets/img/portfolio/24.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/24.jpg')" />
             </picture>
           </div>
           <!-- Item 25 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/25.webp" type="image/webp">
               <img src="assets/img/portfolio/25.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/25.jpg')" />
             </picture>
           </div>
           <!-- Item 26 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/26.webp" type="image/webp">
               <img src="assets/img/portfolio/26.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/26.jpg')" />
             </picture>
           </div>
           <!-- Item 27 -->
-          <div class="gallery-item" data-category="rifle cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/27.webp" type="image/webp">
               <img src="assets/img/portfolio/27.jpg" alt="Custom rifle build" loading="lazy" onclick="openLightbox('assets/img/portfolio/27.jpg')" />
             </picture>
           </div>
           <!-- Item 28 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/28.webp" type="image/webp">
               <img src="assets/img/portfolio/28.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/28.jpg')" />
             </picture>
           </div>
           <!-- Item 29 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/29.webp" type="image/webp">
               <img src="assets/img/portfolio/29.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/29.jpg')" />
             </picture>
           </div>
           <!-- Item 30 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/30.webp" type="image/webp">
               <img src="assets/img/portfolio/30.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/30.jpg')" />
             </picture>
           </div>
           <!-- Item 31 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/31.webp" type="image/webp">
               <img src="assets/img/portfolio/31.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/31.jpg')" />
             </picture>
           </div>
           <!-- Item 32 -->
-          <div class="gallery-item" data-category="rifle cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/32.webp" type="image/webp">
               <img src="assets/img/portfolio/32.jpg" alt="Custom rifle build" loading="lazy" onclick="openLightbox('assets/img/portfolio/32.jpg')" />
             </picture>
           </div>
           <!-- Item 33 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/33.webp" type="image/webp">
               <img src="assets/img/portfolio/33.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/33.jpg')" />
             </picture>
           </div>
           <!-- Item 34 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/34.webp" type="image/webp">
               <img src="assets/img/portfolio/34.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/34.jpg')" />
             </picture>
           </div>
           <!-- Item 35 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/35.webp" type="image/webp">
               <img src="assets/img/portfolio/35.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/35.jpg')" />
             </picture>
           </div>
           <!-- Item 36 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/36.webp" type="image/webp">
               <img src="assets/img/portfolio/36.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/36.jpg')" />
             </picture>
           </div>
           <!-- Item 37 -->
-          <div class="gallery-item" data-category="rifle cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/37.webp" type="image/webp">
               <img src="assets/img/portfolio/37.jpg" alt="Custom rifle build" loading="lazy" onclick="openLightbox('assets/img/portfolio/37.jpg')" />
             </picture>
           </div>
           <!-- Item 38 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="pistol">
             <picture>
               <source srcset="assets/img/portfolio/38.webp" type="image/webp">
               <img src="assets/img/portfolio/38.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/38.jpg')" />
             </picture>
           </div>
           <!-- Item 39 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/39.webp" type="image/webp">
               <img src="assets/img/portfolio/39.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/39.jpg')" />
             </picture>
           </div>
           <!-- Item 40 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/40.webp" type="image/webp">
               <img src="assets/img/portfolio/40.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/40.jpg')" />
             </picture>
           </div>
           <!-- Item 41 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/41.webp" type="image/webp">
               <img src="assets/img/portfolio/41.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/41.jpg')" />
             </picture>
           </div>
           <!-- Item 42 -->
-          <div class="gallery-item" data-category="rifle cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/42.webp" type="image/webp">
               <img src="assets/img/portfolio/42.jpg" alt="Custom rifle build" loading="lazy" onclick="openLightbox('assets/img/portfolio/42.jpg')" />
             </picture>
           </div>
           <!-- Item 43 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/43.webp" type="image/webp">
               <img src="assets/img/portfolio/43.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/43.jpg')" />
             </picture>
           </div>
           <!-- Item 44 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/44.webp" type="image/webp">
               <img src="assets/img/portfolio/44.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/44.jpg')" />
             </picture>
           </div>
           <!-- Item 45 -->
-          <div class="gallery-item" data-category="pistol cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/45.webp" type="image/webp">
               <img src="assets/img/portfolio/45.jpg" alt="Custom pistol build" loading="lazy" onclick="openLightbox('assets/img/portfolio/45.jpg')" />
             </picture>
           </div>
           <!-- Item 46 -->
-          <div class="gallery-item" data-category="ar cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/46.webp" type="image/webp">
               <img src="assets/img/portfolio/46.jpg" alt="Custom AR build" loading="lazy" onclick="openLightbox('assets/img/portfolio/46.jpg')" />
             </picture>
           </div>
           <!-- Item 47 -->
-          <div class="gallery-item" data-category="rifle cerakote">
+          <div class="gallery-item" data-category="rifle">
             <picture>
               <source srcset="assets/img/portfolio/47.webp" type="image/webp">
               <img src="assets/img/portfolio/47.jpg" alt="Custom rifle build" loading="lazy" onclick="openLightbox('assets/img/portfolio/47.jpg')" />
             </picture>
           </div>
+        </div>
+
+        <!-- Show More Button -->
+        <div class="text-center mt-4" id="showMoreContainer">
+          <button class="btn btn-primary btn-lg" id="showMoreBtn">
+            Show More <i class="fas fa-chevron-down ms-2"></i>
+          </button>
         </div>
       </div>
     </section>
@@ -1302,7 +1492,7 @@
         </div>
 
         <!-- Trust Badges -->
-        <div class="trust-badges">
+        <div class="trust-badges" style="justify-content: flex-end; padding-right: 60px;">
           <div class="trust-badge">
             <i class="fas fa-medal"></i>
             <div class="trust-badge-text">U.S. Army<br>Veteran</div>
@@ -1336,7 +1526,7 @@
         </div>
         <div class="col-md-3 col-6">
           <div class="stat-item">
-            <span class="stat-number" data-target="15">0</span>
+            <span class="stat-number" data-target="20">0</span>
             <span class="stat-label">Years Experience</span>
           </div>
         </div>
@@ -1739,6 +1929,28 @@
         // Collect all gallery images (initially visible)
         updateGalleryImages();
 
+        // Gallery expand/collapse functionality
+        const galleryGrid = document.getElementById('galleryGrid');
+        const showMoreBtn = document.getElementById('showMoreBtn');
+        const showMoreContainer = document.getElementById('showMoreContainer');
+
+        // Start with gallery collapsed
+        galleryGrid.classList.add('collapsed');
+
+        showMoreBtn.addEventListener('click', function() {
+          if (galleryGrid.classList.contains('collapsed')) {
+            // Expand gallery
+            galleryGrid.classList.remove('collapsed');
+            showMoreBtn.innerHTML = 'Show Less <i class="fas fa-chevron-up ms-2"></i>';
+          } else {
+            // Collapse gallery
+            galleryGrid.classList.add('collapsed');
+            showMoreBtn.innerHTML = 'Show More <i class="fas fa-chevron-down ms-2"></i>';
+            // Scroll back to gallery top
+            document.getElementById('gallery').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+
         // Add keyboard navigation
         document.addEventListener('keydown', function(e) {
           const lightbox = document.getElementById('lightbox');
@@ -1901,12 +2113,20 @@
       }
 
       function openLightbox(imageSrc) {
+        // Update gallery images array to reflect current filter state
+        updateGalleryImages();
+
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
         const lightboxCounter = document.getElementById('lightbox-counter');
 
         // Find the current image index
-        currentImageIndex = galleryImages.indexOf(imageSrc);
+        currentImageIndex = galleryImages.findIndex(src => src === imageSrc || src.endsWith(imageSrc.split('/').pop()));
+
+        // Fallback if not found
+        if (currentImageIndex === -1) {
+          currentImageIndex = 0;
+        }
 
         lightboxImg.src = imageSrc;
         updateLightboxCounter();
@@ -1993,6 +2213,107 @@
           updateCounter();
         });
       }
+    </script>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTopBtn" title="Back to top" aria-label="Scroll to top">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+      // Scroll to top button functionality
+      const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          scrollToTopBtn.classList.add('show');
+        } else {
+          scrollToTopBtn.classList.remove('show');
+        }
+      });
+
+      scrollToTopBtn.addEventListener('click', function() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Active navigation highlighting
+      const sections = document.querySelectorAll('section[id]');
+      const navLinks = document.querySelectorAll('.navbar-nav a[href^="#"]');
+
+      function highlightNavigation() {
+        let scrollPosition = window.pageYOffset + 100;
+
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute('id');
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+            navLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + sectionId) {
+                link.classList.add('active');
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener('scroll', highlightNavigation);
+      highlightNavigation(); // Run on page load
+
+      // Enhanced form validation feedback
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        const inputs = contactForm.querySelectorAll('input, textarea, select');
+
+        inputs.forEach(input => {
+          input.addEventListener('blur', function() {
+            if (this.hasAttribute('required') && !this.value.trim()) {
+              this.classList.add('is-invalid');
+              this.classList.remove('is-valid');
+            } else if (this.type === 'email' && this.value) {
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              if (emailRegex.test(this.value)) {
+                this.classList.add('is-valid');
+                this.classList.remove('is-invalid');
+              } else {
+                this.classList.add('is-invalid');
+                this.classList.remove('is-valid');
+              }
+            } else if (this.value.trim()) {
+              this.classList.add('is-valid');
+              this.classList.remove('is-invalid');
+            }
+          });
+        });
+      }
+
+      // Add smooth animations for gallery items on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observe all gallery items for fade-in animation
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        item.style.opacity = '0';
+        item.style.transform = 'translateY(20px)';
+        item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(item);
+      });
     </script>
   </body>
 </html>
